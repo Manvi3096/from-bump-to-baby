@@ -9,7 +9,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAJOKnb1hJLPh1jCc9yJG5NGqRipI2QLvQ",
+  apiKey: "AIzaSyAJOKnb1hJLPh1jCc9yJG5NGqRipI2QLvQ"
   authDomain: "from-bump-to-baby.firebaseapp.com",
   projectId: "from-bump-to-baby",
   storageBucket: "from-bump-to-baby.firebasestorage.app",
