@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#8E6AAE" />
+  <title>From Bump to Baby</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">From Bump to Baby</p>
+        <h1>Hi Manvi 🌸</h1>
+        <p id="babyAgeText">Loading...</p>
+      </div>
+      <div class="babyIcon">👶</div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-screen="home">Home</button>
+      <button class="tab" data-screen="kicks">Kicks</button>
+      <button class="tab" data-screen="health">Health</button>
+      <button class="tab" data-screen="exports">Exports</button>
+      <button class="tab" data-screen="settings">Settings</button>
+    </nav>
+
+    <main>
+      <section id="home" class="screen active">
+        <div class="grid two">
+          <div class="card">
+            <p class="label">Baby growth</p>
+            <h2 id="gestationText">--</h2>
+            <p id="growthDaysText">--</p>
+          </div>
+          <div class="card">
+            <p class="label">Delivery countdown</p>
+            <h2 id="countdownText">--</h2>
+            <p id="deliveryDateText">--</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="between">
+            <p class="label">Pregnancy progress</p>
+            <p id="progressPercent">--</p>
+          </div>
+          <div class="progress"><div id="progressBar"></div></div>
+        </div>
+
+        <div class="card">
+          <p class="label">Today Summary</p>
+          <div class="statRow">
+            <div><b id="todayKicks">0</b><span>kicks today</span></div>
+            <div><b id="totalKicks">0</b><span>total kicks</span></div>
+          </div>
+        </div>
+
+        <div class="card kickCard">
+          <div class="between">
+            <div>
+              <p class="label">Current session</p>
+              <h2 id="sessionCount">0 kicks</h2>
+            </div>
+            <button id="startBtn">Start</button>
+          </div>
+          <button id="kickBtn" class="tapBtn" disabled>Tap for kick</button>
+          <div class="summary">
+            <div><span>Started</span><b id="startedAt">--</b></div>
+            <div><span>Time to 10</span><b id="timeToTen">--</b></div>
+            <div><span>Last kick</span><b id="lastKick">--</b></div>
+          </div>
+          <div class="between controls">
+            <button id="endBtn" class="secondary" disabled>End Session</button>
+            <button id="clearSessionBtn" class="secondary">Clear Session View</button>
+          </div>
+        </div>
+
+        <div class="card warning">
+          <h3>Movement safety reminder</h3>
+          <p>If baby movements are clearly reduced from the usual pattern, or you cannot feel 10 movements within 2 hours during a focused count, contact your doctor or maternity unit the same day.</p>
+        </div>
+      </section>
+
+      <section id="kicks" class="screen">
+        <div class="card">
+          <p class="label">Date Range Filter</p>
+          <div class="formGrid">
+            <label>From date <input id="fromDate" type="date" /></label>
+            <label>To date <input id="toDate" type="date" /></label>
+          </div>
+          <button id="applyFilter" class="save">Apply Filter</button>
+          <button id="clearFilter" class="secondary fullBtn">Show All</button>
+        </div>
+
+        <div class="card">
+          <p class="label">Filtered Result</p>
+          <div class="summary">
+            <div><span>Total</span><b id="filteredTotal">0</b></div>
+            <div><span>First</span><b id="filteredFirst">--</b></div>
+            <div><span>Latest</span><b id="filteredLatest">--</b></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <p class="label">Daily Totals</p>
+          <div id="dailyTotals"></div>
+        </div>
+
+        <div class="card">
+          <p class="label">All Timestamps</p>
+          <ol id="timestampList" class="scrollList"></ol>
+        </div>
+      </section>
+
+      <section id="health" class="screen">
+        <div class="card">
+          <p class="label">Add Health Log</p>
+          <div class="formGrid">
+            <label>Date <input id="healthDate" type="date" /></label>
+            <label>Fasting sugar <input id="fasting" type="number" placeholder="86" /></label>
+            <label>Bile acids <input id="bile" type="number" step="0.01" placeholder="49.28" /></label>
+            <label>SGOT / AST <input id="sgot" type="number" placeholder="116" /></label>
+            <label>SGPT / ALT <input id="sgpt" type="number" placeholder="246" /></label>
+            <label>CTG result <input id="ctg" type="text" placeholder="Reactive" /></label>
+          </div>
+          <label class="full">Itching
+            <select id="itching">
+              <option>None</option>
+              <option>Mild</option>
+              <option>Moderate</option>
+              <option>Severe</option>
+            </select>
+          </label>
+          <label class="full">Notes
+            <textarea id="notes" placeholder="Example: 54 movements during CTG"></textarea>
+          </label>
+          <div class="meds">
+            <p class="label">Udiliv</p>
+            <label><input type="checkbox" id="morn" /> Morning</label>
+            <label><input type="checkbox" id="aft" /> Afternoon</label>
+            <label><input type="checkbox" id="night" /> Night</label>
+          </div>
+          <button id="saveHealth" class="save">Save Health Log</button>
+        </div>
+
+        <div class="card">
+          <p class="label">Health History</p>
+          <div id="healthHistory"></div>
+        </div>
+      </section>
+
+      <section id="exports" class="screen">
+        <div class="card">
+          <p class="label">Doctor Report</p>
+          <p>Uses the selected date range from the Kicks tab. If no range is selected, it includes all data.</p>
+          <button id="exportPDF" class="save">Export Doctor PDF</button>
+          <button id="exportCSV" class="save">Export Kicks CSV</button>
+          <button id="exportBackup" class="save">Export Full Backup JSON</button>
+        </div>
+
+        <div class="card">
+          <p class="label">Import Backup</p>
+          <label class="importLabel">Choose backup.json
+            <input id="importFile" type="file" accept=".json,application/json" />
+          </label>
+          <p class="note">This restores kicks, health logs and settings from your backup file.</p>
+        </div>
+      </section>
+
+      <section id="settings" class="screen">
+        <div class="card">
+          <p class="label">Pregnancy Settings</p>
+          <p class="note">LMP is fixed as 15 October 2025. You can change the planned delivery/C-section date anytime.</p>
+          <label>Planned delivery / C-section date
+            <input id="deliveryDateInput" type="date" />
+          </label>
+          <button id="saveSettings" class="save">Save Delivery Date</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
