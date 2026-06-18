@@ -251,8 +251,9 @@ $("importFile").onchange = e => {
       alert("Backup imported.");
       renderAll();
     } catch(err){
-      alert("Could not import this backup file.");
-    }
+  console.error(err);
+  alert("IMPORT ERROR: " + err.message);
+}
   };
   reader.readAsText(file);
 };
