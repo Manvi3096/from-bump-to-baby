@@ -29,3 +29,30 @@ window.firebaseAuth = {
 };
 
 console.log("Firebase initialized");
+const loginBtn = document.getElementById("googleLoginBtn");
+const logoutBtn = document.getElementById("googleLogoutBtn");
+const userEmail = document.getElementById("userEmail");
+
+loginBtn?.addEventListener("click", async () => {
+  try {
+    await signInWithPopup(auth, provider);
+  } catch (e) {
+    alert(e.message);
+  }
+});
+
+logoutBtn?.addEventListener("click", async () => {
+  await signOut(auth);
+});
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    userEmail.textContent = user.email;
+    loginBtn.style.display = "none";
+    logoutBtn.style.display = "inline-block";
+  } else {
+    userEmail.textContent = "";
+    loginBtn.style.display = "inline-block";
+    logoutBtn.style.display = "none";
+  }
+});
